@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امین حدادی | شعر و شاعری</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Samim:wght@400;700&family=Shabnam:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="author" content="امین حدادی - Amin Haddadi">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        body {
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+            overflow-x: hidden;
+            position: relative;
+            animation: fadeInPage 1.5s ease;
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        nav h1 {
+            font-size: 24px;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-family: 'Samim', sans-serif;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-family: 'Shabnam', sans-serif;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #666;
+        }
+        .hamburger {
+            display: none;
+            font-size: 20px;
+            color: #1a1a1a;
+            cursor: pointer;
+        }
+        section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        h2 {
+            font-size: 28px;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+            font-weight: 700;
+            font-family: 'Samim', sans-serif;
+            opacity: 0;
+            animation: fadeInScale 0.8s ease forwards;
+        }
+        h2:nth-child(1) { animation-delay: 0.2s; }
+        h2:nth-child(2) { animation-delay: 0.4s; }
+        h2:nth-child(3) { animation-delay: 0.6s; }
+        h2:nth-child(4) { animation-delay: 0.8s; }
+        h2:nth-child(5) { animation-delay: 1s; }
+        h2:nth-child(6) { animation-delay: 1.2s; }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        h2::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: #1a1a1a;
+            position: absolute;
+            bottom: -5px;
+            right: 50%;
+            transform: translateX(50%);
+        }
+        #intro {
+            margin-top: 100px;
+            text-align: center;
+        }
+        #intro h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-family: 'Samim', sans-serif;
+        }
+        #intro p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 16px;
+            color: #444;
+        }
+        #about {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        #about img {
+            width: 220px;
+            border-radius: 50%;
+            animation: zoomIn 0.8s ease;
+        }
+        #about h1 {
+            margin-bottom: 30px;
+            font-family: 'Samim', sans-serif;
+        }
+        #about p {
+            max-width: 600px;
+            font-size: 16px;
+            color: #444;
+        }
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        .social-links a {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            color: #fff;
+            text-align: center;
+            line-height: 32px;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background: #555;
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+        .divider {
+            width: 80%;
+            height: 1px;
+            background: #1a1a1a;
+            margin: 20px auto;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        .books-grid, .notes-grid, .poems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .translations-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .book-card, .note-card, .poem-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .translation-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .book-card:hover, .translation-item:hover, .note-card:hover, .poem-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .book-card img, .note-card img, .poem-card img {
+            width: 180px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 0 auto;
+        }
+        .translation-item img {
+            width: 150px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .poem-card video {
+            width: 180px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin: 0 auto;
+        }
+        .book-card h3, .note-card h3, .poem-card h3 {
+            font-size: 18px;
+            margin: 10px 0 5px;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-family: 'Samim', sans-serif;
+        }
+        .translation-item h3 {
+            font-size: 20px;
+            margin: 0 0 5px;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-family: 'Samim', sans-serif;
+        }
+        .book-card p, .note-card p, .poem-card p {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+        }
+        .translation-item .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .translation-item p {
+            font-size: 15px;
+            color: #666;
+            margin: 0;
+            line-height: 1.4;
+        }
+        .translation-item p:first-of-type {
+            font-size: 14px;
+            color: #444;
+            font-weight: 500;
+        }
+        .translation-item a {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Shabnam', sans-serif;
+            transition: background 0.3s, transform 0.3s;
+            align-self: flex-start;
+            margin-top: 15px;
+        }
+        .translation-item a:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+        .card-footer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 10px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .book-card a, .note-card a, .poem-card a {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: 'Shabnam', sans-serif;
+            transition: background 0.3s, transform 0.3s;
+            white-space: nowrap;
+        }
+        .book-card a:hover, .note-card a:hover, .poem-card a:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+        audio {
+            width: 100%;
+            max-width: 180px;
+        }
+        .contact-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .contact-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        #contact input,
+        #contact textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background: #f9f9f9;
+            width: 100%;
+            margin-bottom: 10px;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        #contact button {
+            padding: 10px;
+            background: #1a1a1a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            width: 100%;
+            font-family: 'Shabnam', sans-serif;
+        }
+        .contact-card:hover button {
+            animation: pulse 0.8s infinite;
+        }
+        #contact button:hover {
+            background: #333;
+            transform: scale(1.03);
+        }
+        footer {
+            background: #1a1a1a;
+            color: #b0bec5;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            border-top: 1px solid #333;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        h1 {
+            color: #444;
+            font-size: 28px;
+            font-family: 'Samim', sans-serif;
+        }
+        p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        #notification {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #a9a9a9;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 220px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Shabnam', sans-serif;
+        }
+        #notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        #notification.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-15px);
+        }
+        #notification.success {
+            background: #708090;
+        }
+        #notification.error {
+            background: #696969;
+        }
+        .dots {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .dot.active {
+            background: #1a1a1a;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 50px;
+                right: 0;
+                background: #fff;
+                width: 100%;
+                padding: 15px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+            #intro {
+                margin-top: 80px;
+            }
+            #about {
+                flex-direction: column;
+                text-align: center;
+            }
+            #about img {
+                width: 180px;
+            }
+            .books-grid, .poems-grid, .notes-grid {
+                position: relative;
+                height: 450px;
+                overflow: hidden;
+                padding: 0 10px;
+            }
+            .books-grid .book-card, .poems-grid .poem-card, .notes-grid .note-card {
+                position: absolute;
+                width: 100%;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: opacity 0.5s ease, transform 0.5s ease;
+            }
+            .books-grid .book-card.active, .poems-grid .poem-card.active, .notes-grid .note-card.active {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            .books-grid .book-card.exiting-right, .poems-grid .poem-card.exiting-right, .notes-grid .note-card.exiting-right {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            .books-grid .book-card.exiting-left, .poems-grid .poem-card.exiting-left, .notes-grid .note-card.exiting-left {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            .dots {
+                display: block;
+            }
+            .translations-grid {
+                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column;
+            }
+            .contact-card {
+                padding: 15px;
+                max-width: 100%;
+            }
+            #notification {
+                top: 60px;
+                min-width: unset;
+                width: 80%;
+                max-width: 300px;
+                font-size: 13px;
+                padding: 10px 15px;
+            }
+            .book-card, .translation-item, .note-card, .poem-card {
+                height: auto;
+                min-height: 450px;
+            }
+            .translation-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .translation-item img {
+                width: 120px;
+                height: 160px;
+            }
+            .translation-item a {
+                align-self: center;
+            }
+            h1 { font-size: 24px; }
+            h2 { font-size: 22px; }
+            p { font-size: 14px; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .books-grid, .notes-grid, .poems-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            h1 { font-size: 26px; }
+            h2 { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>امین حدادی | شعر و شاعری</h1>
+            <ul>
+                <li><a href="#about">درباره من</a></li>
+                <li><a href="#books">کتاب‌ها</a></li>
+                <li><a href="#poems">شعرها</a></li>
+                <li><a href="#translations">ترجمه‌ها</a></li>
+                <li><a href="#notes">یادداشت‌ها</a></li>
+                <li><a href="#contact">تماس با من</a></li>
+            </ul>
+            <div class="hamburger">☰</div>
+        </nav>
+    </header>
+    <div id="notification" class="notification"></div>
+    <section id="intro"></section>
+    
+    <section id="about">
+        <img src="images/profile.jpg" alt="امین حدادی">
+        <div>
+            <h1>امین حدادی | شعر و شاعری</h1>
+            <p>امین حدادی، شاعر، مترجم و منتقد ادبی ساکن تهران است. از او آثاری چون «زخم‌های باز و ملال تهران» (نشر افراز)، «تراشکاری فلز آینده؛ چهار پاره و یک آنتولوژی از پرتره مجید نفیسی» (نشر بارو) و «اذن دخول» (نشر بارو) منتشر شده است. آخرین اثر او، منظومه «گفت‌وگو با نطفه»، به‌صورت ناشر-مولف (بیرق‌ها و لکه‌ها) به چاپ رسیده و مقالات و ترجمه‌هایش در مجلات ادبی کاغذی و مجازی منتشر شده‌اند.</p>
+            <div class="social-links">
+                <a href="https://instagram.com" target="_blank" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me" target="_blank" title="واتساپ"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me" target="_blank" title="تلگرام"><i class="fab fa-telegram-plane"></i></a>
+                <a href="mailto:amin@example.com" title="ایمیل"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+    <section id="books">
+        <h2>کتاب‌ها</h2>
+        <div class="dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+        </div>
+        <div class="books-grid">
+            <div class="book-card active">
+                <img src="images/book1.jpg" alt="از زخم‌های باز و ملال تهران">
+                <h3>از زخم‌های باز و ملال تهران</h3>
+                <p>امین حدادی | نشر افراز، ۱۴۰۰</p>
+                <p>عبور کن از آستان برج قمار از کرانه‌های تاریک حجره‌ها چراکه فواره‌ی گلوی تو از استخر برج و صدای کبود قوم من در انعکاس سنگاب‌های مسجد شاه طنین دیگر دارد.</p>
+                <div class="card-footer">
+                    <a href="https://www.iranketab.ir/book/64612-az-zakhm-haye-baz-va-malal-e-tehran" target="_blank">خرید کتاب</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <img src="images/book2.jpg" alt="تراشکاری فلز آینده">
+                <h3>تراشکاری فلز آینده</h3>
+                <p>امین حدادی | نشر بارو، ۱۳۹۹</p>
+                <p>این کتاب طرحِ ایده‌هایی در چهار پاره از دیدارِ شعر مجید نفیسی است و از حواشی نامرئیِ چهره‌ی او.</p>
+                <div class="card-footer">
+                    <a href="files/book2.pdf" download>دانلود PDF</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <img src="images/book3.jpg" alt="کتاب سوم - به زودی">
+                <h3>کتاب سوم (به زودی)</h3>
+                <p>امین حدادی | در حال آماده‌سازی</p>
+                <p>این کتاب هنوز در دست نگارش است و به زودی با شما همراهان به اشتراک گذاشته خواهد شد.</p>
+                <div class="card-footer">
+                    <a href="#" style="pointer-events: none; opacity: 0.6;">به زودی</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="poems">
+        <h2>شعرها</h2>
+        <div class="dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+        </div>
+        <div class="poems-grid">
+            <div class="poem-card active">
+                <img src="images/poem1.jpg" alt="بهاریه به‌رغم وحشت">
+                <h3>بهاریه به‌رغم وحشت</h3>
+                <p>شعری درباره بهار و وحشت</p>
+                <p>شعر و صدای امین حدادی | نوروز ۱۴۰۳ خورشیدی || بارو</p>
+                <div class="card-footer">
+                    <audio controls preload="metadata" src="files/poem1.mp3"></audio>
+                </div>
+            </div>
+            <div class="poem-card">
+                <video controls preload="metadata">
+                    <source src="images/poem3-video.mp4" type="video/mp4">
+                    مرورگر شما از ویدیو پشتیبانی نمی‌کند.
+                </video>
+                <h3>در ستایش نور</h3>
+                <p>منظومه‌ای برای نمایشگاه</p>
+                <p>امین حدادی | ۱۶ اسفند ۱۴۰۱ | بارو</p>
+                <div class="card-footer">
+                    <audio controls preload="metadata" src="files/poem3-audio.mp3"></audio>
+                </div>
+            </div>
+            <div class="poem-card">
+                <img src="images/poem2.jpg" alt="شعر دوم">
+                <h3>شعر دوم</h3>
+                <p>شعری مرموز و عمیق</p>
+                <p>۱۳ آبان ۱۴۰۳ تهران</p>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="translations">
+        <h2>ترجمه‌ها</h2>
+        <div class="translations-grid">
+            <div class="translation-item">
+                <div class="content">
+                    <h3>دفترچه‌ی شش شعر</h3>
+                    <p>ترجمه‌ی امین حدادی</p>
+                    <p>مجموعه‌ای از شش شعر ترجمه‌شده توسط امین حدادی که در نشر بارو منتشر شده است.</p>
+                    <a href="https://baru.ir/mag-contents/booklet-of-six-poems/" target="_blank">خواندن ترجمه</a>
+                </div>
+                <img src="images/translation1.jpg" alt="ترجمه 1">
+            </div>
+            <div class="translation-item">
+                <div class="content">
+                    <h3>هفت شعر از اینگه‌بورگ باخمان</h3>
+                    <p>ترجمه‌ی امین حدادی</p>
+                    <p>ترجمه‌ی هفت شعر از اینگه‌بورگ باخمان، شاعر اتریشی، توسط امین حدادی در نشر بارو.</p>
+                    <a href="https://baru.ir/poem/ingeborg-bachmann-seven-poems/" target="_blank">خواندن ترجمه</a>
+                </div>
+                <img src="images/translation2.jpg" alt="ترجمه 2">
+            </div>
+        </div>
+    </section>
+    <section id="notes">
+        <h2>یادداشت‌ها و جستارها</h2>
+        <div class="dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+        </div>
+        <div class="notes-grid">
+            <div class="note-card active">
+                <img src="images/note1.jpg" alt="یادداشت 1">
+                <h3>بر مزار هدایت</h3>
+                <p>امین حدادی</p>
+                <p>دیری است که کتاب «بر مزار هدایت» به جانمان نشسته. بسیاری از آثار پس از آن، یا بسط ایده‌های اسحاق‌پورند یا از او الهام گرفته‌اند.</p>
+                <div class="card-footer">
+                    <a href="files/note1.pdf" download>دانلود PDF</a>
+                </div>
+            </div>
+            <div class="note-card">
+                <img src="images/note2.jpg" alt="یادداشت 2">
+                <h3>عارف و وزیری</h3>
+                <p>امین حدادی</p>
+                <p>برای خالقی، عارف و وزیری دو روی یک سکه‌اند: احیای تصنیف‌سازی با عارف و تأسیس موسیقی علمی با وزیری.</p>
+                <div class="card-footer">
+                    <a href="files/note2.pdf" download>دانلود PDF</a>
+                </div>
+            </div>
+            <div class="note-card">
+                <img src="images/note3.jpg" alt="یادداشت 3">
+                <h3>اطلسِ غربت</h3>
+                <p>امین حدادی</p>
+                <p>سال‌ها در سکوت می‌گذرد. از شاعر جز «زنده است» خبری نیست. راوی لکنت، راه ارتباطی را ریشخند می‌داند.</p>
+                <div class="card-footer">
+                    <a href="https://baru.ir/poem/the-atlas-of-roam/" target="_blank">متن کتاب</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <h2>تماس با من</h2>
+        <div class="contact-card">
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="نام شما" required>
+                <input type="email" name="email" placeholder="ایمیل شما" required>
+                <textarea name="message" placeholder="پیام شما" rows="5" required></textarea>
+                <button type="submit">ارسال پیام</button>
+            </form>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 امین حدادی | تمامی حقوق محفوظ است</p>
+            <p class="copyright">
+                طراحی‌شده توسط <a style="color: dodgerblue;" href="https://github.com/TH-SOREN" target="_blank">Soren</a>
+            </p>
+        </div>
+    </footer>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+        const hamburger = document.querySelector('.hamburger');
+        const navUl = document.querySelector('nav ul');
+        hamburger.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+        });
+        const form = document.getElementById('contact-form');
+        const notification = document.getElementById('notification');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            try {
+                const response = await fetch('https://formspree.io/f/xyzezdoe', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    showNotification('پیام شما با موفقیت ارسال شد!', 'success');
+                    form.reset();
+                } else {
+                    showNotification('خطایی رخ داد. لطفاً دوباره تلاش کنید.', 'error');
+                }
+            } catch (error) {
+                showNotification('خطایی رخ داد. لطفاً دوباره تلاش کنید.', 'error');
+            }
+        });
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+                notification.classList.add('hide');
+            }, 4000);
+            setTimeout(() => {
+                notification.classList.remove('hide');
+            }, 4400);
+        }
+        function setupSlider(gridSelector, cardSelector, dotsSelector) {
+            const cards = document.querySelectorAll(`${gridSelector} ${cardSelector}`);
+            const dots = document.querySelectorAll(`${gridSelector} ~ ${dotsSelector} .dot`);
+            let currentIndex = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let sliderInterval;
+
+            function updateSlider(newIndex, direction) {
+                if (newIndex === currentIndex) return;
+                const currentCard = cards[currentIndex];
+                const newCard = cards[newIndex];
+                
+                if (direction === 'next') {
+                    currentCard.classList.add('exiting-right');
+                } else {
+                    currentCard.classList.add('exiting-left');
+                }
+
+                setTimeout(() => {
+                    currentCard.classList.remove('active', 'exiting-right', 'exiting-left');
+                    newCard.classList.add('active');
+                    dots.forEach((dot, i) => dot.classList.toggle('active', i === newIndex));
+                    currentIndex = newIndex;
+                }, 500);
+            }
+
+            function startSlider() {
+                if (window.innerWidth <= 768) {
+                    clearInterval(sliderInterval);
+                    cards.forEach((card, i) => {
+                        card.style.display = 'flex';
+                        card.classList.toggle('active', i === currentIndex);
+                        card.classList.remove('exiting-right', 'exiting-left');
+                    });
+                    sliderInterval = setInterval(() => {
+                        const nextIndex = (currentIndex + 1) % cards.length;
+                        updateSlider(nextIndex, 'next');
+                    }, 5000);
+                } else {
+                    clearInterval(sliderInterval);
+                    cards.forEach(card => {
+                        card.style.display = 'flex';
+                        card.classList.remove('active', 'exiting-right', 'exiting-left');
+                    });
+                }
+            }
+
+            startSlider();
+            window.addEventListener('resize', startSlider);
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const newIndex = parseInt(dot.getAttribute('data-index'));
+                    if (newIndex !== currentIndex && window.innerWidth <= 768) {
+                        const direction = newIndex > currentIndex ? 'next' : 'prev';
+                        updateSlider(newIndex, direction);
+                        clearInterval(sliderInterval);
+                        sliderInterval = setInterval(() => {
+                            const nextIndex = (currentIndex + 1) % cards.length;
+                            updateSlider(nextIndex, 'next');
+                        }, 5000);
+                    }
+                });
+            });
+
+            document.querySelector(gridSelector).addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            document.querySelector(gridSelector).addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeDistance = touchStartX - touchEndX;
+                if (swipeDistance > 50 && window.innerWidth <= 768) {
+                    const nextIndex = (currentIndex + 1) % cards.length;
+                    updateSlider(nextIndex, 'next');
+                    clearInterval(sliderInterval);
+                    sliderInterval = setInterval(() => {
+                        const nextIndex = (currentIndex + 1) % cards.length;
+                        updateSlider(nextIndex, 'next');
+                    }, 5000);
+                } else if (swipeDistance < -50 && window.innerWidth <= 768) {
+                    const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
+                    updateSlider(prevIndex, 'prev');
+                    clearInterval(sliderInterval);
+                    sliderInterval = setInterval(() => {
+                        const nextIndex = (currentIndex + 1) % cards.length;
+                        updateSlider(nextIndex, 'next');
+                    }, 5000);
+                }
+            }
+        }
+        setupSlider('.books-grid', '.book-card', '.dots');
+        setupSlider('.poems-grid', '.poem-card', '.dots');
+        setupSlider('.notes-grid', '.note-card', '.dots');
+    </script>
+</body>
+</html>
