@@ -844,7 +844,7 @@
                 }
             });
         });
-        
+    
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -859,12 +859,12 @@
                 }
             });
         }, { threshold: 0.1 });
-        
+    
         sections.forEach(section => observer.observe(section));
-        
+    
         const hamburger = document.querySelector('.hamburger');
         const navUl = document.querySelector('nav ul');
-        
+    
         hamburger.addEventListener('click', () => {
             if (navUl.classList.contains('active')) {
                 navUl.classList.remove('opening');
@@ -881,10 +881,10 @@
                 }, 400);
             }
         });
-        
+    
         const form = document.getElementById('contact-form');
         const notification = document.getElementById('notification');
-        
+    
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
@@ -904,7 +904,7 @@
                 showNotification('خطایی رخ داد. لطفاً دوباره تلاش کنید.', 'error');
             }
         });
-        
+    
         function showNotification(message, type) {
             notification.textContent = message;
             notification.className = `notification ${type}`;
@@ -917,9 +917,9 @@
                 notification.classList.remove('hide');
             }, 4400);
         }
-        
-        let isAudioPlaying = false;
-        
+    
+        let isMediaPlaying = false;
+    
         function setupSlider(gridSelector, cardSelector, dotsSelector) {
             const grid = document.querySelector(gridSelector);
             const cards = document.querySelectorAll(`${gridSelector} ${cardSelector}`);
@@ -929,7 +929,7 @@
             let touchEndX = 0;
             let sliderInterval;
             let isAnimating = false;
-        
+    
             const style = document.createElement('style');
             style.textContent = `
                 @media (max-width: 768px) {
@@ -1009,7 +1009,7 @@
                 }
             `;
             document.head.appendChild(style);
-        
+    
             const sliderNav = document.createElement('div');
             sliderNav.className = 'slider-nav';
             sliderNav.innerHTML = `
@@ -1019,45 +1019,58 @@
             grid.parentNode.classList.add('slider-container');
             grid.parentNode.style.position = 'relative';
             grid.parentNode.insertBefore(sliderNav, grid.nextSibling);
-        
+    
             const prevBtn = sliderNav.querySelector('.prev-btn');
             const nextBtn = sliderNav.querySelector('.next-btn');
-        
+    
             if (gridSelector === '.poems-grid') {
                 const audioElements = document.querySelectorAll('#poems .poem-card audio');
+                const videoElements = document.querySelectorAll('#poems .poem-card video');
+    
                 audioElements.forEach(audio => {
                     audio.addEventListener('play', () => {
-                        isAudioPlaying = true;
+                        isMediaPlaying = true;
                         clearInterval(sliderInterval);
                     });
                     audio.addEventListener('pause', () => {
-                        isAudioPlaying = false;
+                        isMediaPlaying = false;
                         startSlider();
                     });
                     audio.addEventListener('ended', () => {
-                        isAudioPlaying = false;
+                        isMediaPlaying = false;
                         startSlider();
                     });
                 });
-        
-                const videoElements = document.querySelectorAll('#poems .poem-card video');
+    
                 videoElements.forEach(video => {
-                    video.addEventListener('play', () => video.requestFullscreen());
+                    video.addEventListener('play', () => {
+                        isMediaPlaying = true;
+                        clearInterval(sliderInterval);
+                        video.requestFullscreen();
+                    });
+                    video.addEventListener('pause', () => {
+                        isMediaPlaying = false;
+                        startSlider();
+                    });
+                    video.addEventListener('ended', () => {
+                        isMediaPlaying = false;
+                        startSlider();
+                    });
                 });
             }
-        
+    
             function updateSlider(newIndex, direction = 'next') {
                 if (isAnimating || window.innerWidth > 768) return;
                 isAnimating = true;
-        
+    
                 const currentCard = cards[currentIndex];
                 const newCard = cards[newIndex];
-        
+    
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === newIndex));
-        
+    
                 currentCard.classList.remove('active');
                 currentCard.classList.add(direction === 'next' ? 'slide-fade-out' : 'slide-fade-out-reverse');
-        
+    
                 setTimeout(() => {
                     currentCard.style.display = 'none';
                     currentCard.classList.remove(direction === 'next' ? 'slide-fade-out' : 'slide-fade-out-reverse');
@@ -1071,7 +1084,7 @@
                     }, 500);
                 }, 500);
             }
-        
+    
             function startSlider() {
                 if (window.innerWidth <= 768) {
                     clearInterval(sliderInterval);
@@ -1084,9 +1097,9 @@
                             card.classList.remove('active');
                         }
                     });
-                    if (isAudioPlaying) return;
+                    if (isMediaPlaying) return;
                     sliderInterval = setInterval(() => {
-                        if (!isAnimating && !isAudioPlaying) {
+                        if (!isAnimating && !isMediaPlaying) {
                             const nextIndex = (currentIndex + 1) % cards.length;
                             updateSlider(nextIndex, 'next');
                         }
@@ -1096,7 +1109,7 @@
                     cards.forEach(card => card.style.display = 'flex');
                 }
             }
-        
+    
             function goToNext() {
                 if (!isAnimating && window.innerWidth <= 768) {
                     clearInterval(sliderInterval);
@@ -1105,7 +1118,7 @@
                     setTimeout(startSlider, 8000);
                 }
             }
-        
+    
             function goToPrev() {
                 if (!isAnimating && window.innerWidth <= 768) {
                     clearInterval(sliderInterval);
@@ -1114,23 +1127,23 @@
                     setTimeout(startSlider, 8000);
                 }
             }
-        
+    
             startSlider();
             window.addEventListener('resize', startSlider);
-        
+    
             grid.addEventListener('touchstart', (e) => {
                 if (window.innerWidth <= 768) {
                     touchStartX = e.changedTouches[0].screenX;
                 }
             }, { passive: true });
-        
+    
             grid.addEventListener('touchend', (e) => {
                 if (window.innerWidth <= 768) {
                     touchEndX = e.changedTouches[0].screenX;
                     handleSwipe();
                 }
             }, { passive: true });
-        
+    
             function handleSwipe() {
                 const swipeDistance = touchStartX - touchEndX;
                 if (window.innerWidth <= 768) {
@@ -1138,10 +1151,10 @@
                     else if (swipeDistance < -50) goToPrev();
                 }
             }
-        
+    
             nextBtn.addEventListener('click', goToNext);
             prevBtn.addEventListener('click', goToPrev);
-        
+    
             dots.forEach(dot => {
                 dot.addEventListener('click', () => {
                     if (window.innerWidth <= 768 && !isAnimating) {
@@ -1154,7 +1167,7 @@
                 });
             });
         }
-        
+    
         setupSlider('.books-grid', '.book-card', '#books .dots');
         setupSlider('.poems-grid', '.poem-card', '#poems .dots');
         setupSlider('.notes-grid', '.note-card', '#notes .dots');
