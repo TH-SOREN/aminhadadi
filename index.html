@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>امین حدادی | شعر و شاعری</title>
+    <title>امین حدادی| شعر و شاعری</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Samim:wght@400;700&family=Shabnam:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -15,6 +15,7 @@
             box-sizing: border-box;
             font-family: 'Vazirmatn', sans-serif;
         }
+
         body {
             background: #FFFFFF;
             color: #1A1A1A;
@@ -22,10 +23,12 @@
             overflow-x: hidden;
             animation: fadeInPage 0.8s ease-in-out;
         }
+
         @keyframes fadeInPage {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
         header {
             position: fixed;
             top: 0;
@@ -35,6 +38,7 @@
             padding: 15px 0;
             z-index: 1000;
         }
+
         nav {
             max-width: 1200px;
             margin: 0 auto;
@@ -43,17 +47,20 @@
             align-items: center;
             padding: 0 20px;
         }
+
         nav h1 {
             font-size: 24px;
             color: #1A1A1A;
             font-weight: 700;
             font-family: 'Samim', sans-serif;
         }
+
         nav ul {
             list-style: none;
             display: flex;
             gap: 25px;
         }
+
         nav ul li a {
             text-decoration: none;
             color: #1A1A1A;
@@ -61,15 +68,18 @@
             font-family: 'Shabnam', sans-serif;
             transition: color 0.2s ease;
         }
+
         nav ul li a:hover {
             color: #666;
         }
+
         .hamburger {
             display: none;
             font-size: 20px;
             color: #1A1A1A;
             cursor: pointer;
         }
+
         section {
             max-width: 1200px;
             margin: 60px auto;
@@ -78,10 +88,12 @@
             transform: translateY(20px);
             transition: all 0.6s ease;
         }
+
         section.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         h2 {
             font-size: 28px;
             color: #1A1A1A;
@@ -92,31 +104,37 @@
             opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
         }
+
         h2:nth-child(1) { animation-delay: 0.2s; }
         h2:nth-child(2) { animation-delay: 0.4s; }
         h2:nth-child(3) { animation-delay: 0.6s; }
         h2:nth-child(4) { animation-delay: 0.8s; }
         h2:nth-child(5) { animation-delay: 1s; }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         #intro {
             margin-top: 100px;
             text-align: center;
         }
+
         #intro h1 {
             font-size: 32px;
             color: #1A1A1A;
             margin-bottom: 20px;
             font-family: 'Samim', sans-serif;
         }
+
         #intro p {
             max-width: 800px;
             margin: 0 auto;
             font-size: 16px;
             color: #666;
         }
+
         #about {
             display: flex;
             align-items: center;
@@ -125,34 +143,41 @@
             justify-content: center;
             margin-top: 60px;
         }
+
         #about img {
             width: 220px;
             border-radius: 50%;
         }
+
         #about h1 {
             margin-bottom: 20px;
             font-family: 'Samim', sans-serif;
             font-size: 28px;
         }
+
         #about p {
             max-width: 600px;
             font-size: 16px;
             color: #666;
         }
+
         .social-links {
             margin-top: 15px;
             display: flex;
             gap: 15px;
         }
+
         .social-links a {
             color: #1A1A1A;
             font-size: 18px;
             text-decoration: none;
             transition: color 0.2s ease;
         }
+
         .social-links a:hover {
             color: #666;
         }
+
         .divider {
             width: 80%;
             height: 1px;
@@ -161,16 +186,31 @@
             opacity: 0;
             animation: fadeIn 0.8s ease forwards;
         }
-        .books-grid, .notes-grid, .poems-grid {
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .notes-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
+
+        .poems-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
         .translations-grid {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
+
         .book-card, .note-card, .poem-card {
             background: #FFFFFF;
             padding: 20px;
@@ -183,6 +223,7 @@
             justify-content: space-between;
             height: 450px;
         }
+
         .translation-item {
             background: #FFFFFF;
             padding: 20px;
@@ -193,10 +234,12 @@
             gap: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .book-card:hover, .translation-item:hover, .note-card:hover, .poem-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
         .book-card img, .note-card img, .poem-card img {
             width: 180px;
             height: 240px;
@@ -204,12 +247,14 @@
             border-radius: 5px;
             margin: 0 auto;
         }
+
         .translation-item img {
             width: 150px;
             height: 200px;
             object-fit: cover;
             border-radius: 5px;
         }
+
         .poem-card video {
             width: 180px;
             height: 240px;
@@ -217,6 +262,7 @@
             border-radius: 5px;
             margin: 0 auto;
         }
+
         .book-card h3, .note-card h3, .poem-card h3 {
             font-size: 18px;
             margin: 10px 0 5px;
@@ -224,6 +270,7 @@
             font-weight: 700;
             font-family: 'Samim', sans-serif;
         }
+
         .translation-item h3 {
             font-size: 20px;
             margin: 0 0 5px;
@@ -231,28 +278,33 @@
             font-weight: 700;
             font-family: 'Samim', sans-serif;
         }
+
         .book-card p, .note-card p, .poem-card p {
             font-size: 14px;
             color: #666;
             margin: 5px 0;
         }
+
         .translation-item .content {
             flex: 1;
             display: flex;
             flex-direction: column;
             gap: 5px;
         }
+
         .translation-item p {
             font-size: 15px;
             color: #666;
             margin: 0;
             line-height: 1.4;
         }
+
         .translation-item p:first-of-type {
             font-size: 14px;
             color: #444;
             font-weight: 500;
         }
+
         .translation-item a {
             display: inline-block;
             padding: 8px 15px;
@@ -267,9 +319,11 @@
             align-self: flex-start;
             margin-top: 15px;
         }
+
         .translation-item a:hover {
             background: #333;
         }
+
         .card-footer {
             display: flex;
             justify-content: center;
@@ -277,6 +331,7 @@
             margin-top: auto;
             padding-top: 10px;
         }
+
         .book-card a, .note-card a, .poem-card a {
             display: inline-block;
             padding: 8px 15px;
@@ -289,14 +344,17 @@
             transition: background 0.2s ease;
             line-height: 1;
         }
+
         .book-card a:hover, .note-card a:hover, .poem-card a:hover {
             background: #333;
         }
+
         audio {
             width: 100%;
             max-width: 300px;
-            height: 50px; 
+            height: 50px;
         }
+
         .contact-card {
             background: #FFFFFF;
             padding: 20px;
@@ -306,10 +364,12 @@
             max-width: 700px;
             margin: 0 auto;
         }
+
         .contact-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
         #contact input,
         #contact textarea {
             padding: 10px;
@@ -321,6 +381,7 @@
             margin-bottom: 10px;
             font-family: 'Vazirmatn', sans-serif;
         }
+
         #contact button {
             padding: 10px;
             background: #1A1A1A;
@@ -332,9 +393,11 @@
             width: 100%;
             font-family: 'Shabnam', sans-serif;
         }
+
         #contact button:hover {
             background: #333;
         }
+
         footer {
             background: #1A1A1A;
             color: #B0BEC5;
@@ -343,23 +406,28 @@
             font-size: 14px;
             border-top: 1px solid #D3D3D3;
         }
+
         footer p {
             margin: 5px 0;
         }
+
         h1 {
             color: #1A1A1A;
             font-size: 28px;
             font-family: 'Samim', sans-serif;
         }
+
         p {
             color: #666;
             font-size: 15px;
             line-height: 1.6;
         }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
         #notification {
             position: fixed;
             top: 70px;
@@ -377,24 +445,30 @@
             font-weight: 700;
             font-family: 'Shabnam', sans-serif;
         }
+
         #notification.show {
             opacity: 1;
         }
+
         #notification.hide {
             opacity: 0;
         }
+
         #notification.success {
             background: #E0E0E0;
         }
+
         #notification.error {
             background: #666;
             color: #FFFFFF;
         }
+
         .dots {
             display: none;
             text-align: center;
             margin: 10px 0;
         }
+
         .dot {
             display: inline-block;
             width: 10px;
@@ -405,9 +479,11 @@
             cursor: pointer;
             transition: background 0.3s;
         }
+
         .dot.active {
             background: #1A1A1A;
         }
+
         @media (max-width: 768px) {
             nav ul {
                 display: none;
@@ -478,24 +554,86 @@
             .translations-grid {
                 display: flex;
                 flex-direction: column;
+                gap: 20px;
             }
             .translation-item {
+                display: flex;
                 flex-direction: column;
+                height: 450px;
                 text-align: center;
+                padding: 20px;
+                border: 1px solid #E0E0E0;
+                border-radius: 8px;
+                background: #FFFFFF;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
             .translation-item img {
-                width: 120px;
-                height: 160px;
+                width: 180px;
+                height: 240px;
+                object-fit: cover;
+                border-radius: 5px;
+                margin: 0 auto;
+                order: 1;
+            }
+            .translation-item .content {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                order: 2;
+            }
+            .translation-item h3 {
+                font-size: 18px;
+                margin: 10px 0 5px;
+                color: #1A1A1A;
+                font-weight: 700;
+                font-family: 'Samim', sans-serif;
+            }
+            .translation-item p {
+                font-size: 14px;
+                color: #666;
+                margin: 5px 0;
             }
             .translation-item a {
+                display: inline-block;
+                padding: 8px 15px;
+                background: #1A1A1A;
+                color: #FFFFFF;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 14px;
+                font-family: 'Shabnam', sans-serif;
+                transition: background 0.2s ease;
                 align-self: center;
+                margin-top: 10px;
+                order: 3;
             }
             h1 { font-size: 24px; }
             h2 { font-size: 22px; }
             p { font-size: 14px; }
         }
+
+        @media (min-width: 769px) {
+            .slider-nav { display: none; }
+            @keyframes cardFadeIn {
+                0% { opacity: 0; transform: translateY(30px); box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+                100% { opacity: 1; transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+            }
+            .book-card, .poem-card, .note-card, .translation-item {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.3s ease-out;
+            }
+            .book-card:hover, .poem-card:hover, .note-card:hover, .translation-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            }
+        }
+
         @media (min-width: 769px) and (max-width: 1024px) {
-            .books-grid, .notes-grid, .poems-grid {
+            .books-grid, .poems-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .notes-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             h1 { font-size: 26px; }
@@ -506,7 +644,7 @@
 <body>
     <header>
         <nav>
-            <h1>امین حدادی | شعر و شاعری</h1>
+            <h1>امین حدادی| شعر و شاعری</h1>
             <ul>
                 <li><a href="#about">درباره من</a></li>
                 <li><a href="#books">کتاب‌ها</a></li>
@@ -527,10 +665,8 @@
             <h1>امین حدادی | شعر و شاعری</h1>
             <p>امین حدادی، شاعر، مترجم و منتقد ادبی ساکن تهران است. از او آثاری چون «زخم‌های باز و ملال تهران» (نشر افراز)، «تراشکاری فلز آینده؛ چهار پاره و یک آنتولوژی از پرتره مجید نفیسی» (نشر بارو) و «اذن دخول» (نشر بارو) منتشر شده است. آخرین اثر او، منظومه «گفت‌وگو با نطفه»، به‌صورت ناشر-مولف (بیرق‌ها و لکه‌ها) به چاپ رسیده و مقالات و ترجمه‌هایش در مجلات ادبی کاغذی و مجازی منتشر شده‌اند.</p>
             <div class="social-links">
-                <a href="https://instagram.com" target="_blank" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me" target="_blank" title="واتساپ"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://t.me" target="_blank" title="تلگرام"><i class="fab fa-telegram-plane"></i></a>
-                <a href="mailto:amin@example.com" title="ایمیل"><i class="fas fa-envelope"></i></a>
+                <a href="https://instagram.com/amin.hadadi71/" target="_blank" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                <a href="https://t.me/Baruwiki" target="_blank" title="تلگرام"><i class="fab fa-telegram-plane"></i></a>
             </div>
         </div>
     </section>
@@ -541,13 +677,14 @@
             <span class="dot active" data-index="0"></span>
             <span class="dot" data-index="1"></span>
             <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
         </div>
         <div class="books-grid">
             <div class="book-card active">
                 <img src="images/book1.jpg" alt="از زخم‌های باز و ملال تهران">
                 <h3>از زخم‌های باز و ملال تهران</h3>
-                <p>امین حدادی | نشر افراز، ۱۴۰۰</p>
-                <p>عبور کن از آستان برج قمار، چراکه فواره‌ی گلوی تو و صدای کبود قوم من در سنگاب‌های مسجد شاه طنین دارد.</p>
+                <p>امین حدادی| نشر افراز، ۱۴۰۰</p>
+                <p>عبور از محدودیت‌ها برای بیان صدای قوم.</p>
                 <div class="card-footer">
                     <a href="https://www.iranketab.ir/book/64612-az-zakhm-haye-baz-va-malal-e-tehran" target="_blank">خرید کتاب</a>
                 </div>
@@ -555,19 +692,28 @@
             <div class="book-card">
                 <img src="images/book2.jpg" alt="تراشکاری فلز آینده">
                 <h3>تراشکاری فلز آینده</h3>
-                <p>امین حدادی | نشر بارو، ۱۳۹۹</p>
-                <p>این کتاب طرحِ ایده‌هایی در چهار پاره از دیدارِ شعر مجید نفیسی است و از حواشی نامرئیِ چهره‌ی او.</p>
+                <p>امین حدادی| نشر بارو، ۱۳۹۸</p>
+                <p>این کتاب ایده‌هایی از شعر مجید نفیسی و حواشی چهره‌ی او را ارائه می‌دهد.</p>
                 <div class="card-footer">
-                    <a href="files/book2.pdf" download>دانلود PDF</a>
+                    <a href="files/Tarashkariye Feleze Ayande.pdf" download>دانلود PDF</a>
                 </div>
             </div>
             <div class="book-card">
-                <img src="images/book3.jpg" alt="کتاب سوم - به زودی">
-                <h3>کتاب سوم (به زودی)</h3>
-                <p>امین حدادی | در حال آماده‌سازی</p>
-                <p>این کتاب هنوز در دست نگارش است و به زودی با شما همراهان به اشتراک گذاشته خواهد شد.</p>
+                <img src="images/book3.jpg" alt="منظومه اذن دخول">
+                <h3>منظومه اذن دخول</h3>
+                <p>امین حدادی| نشر بارو، ۱۴۰۲</p>
+                <p>زیارت‌نامه‌های خوف و پَرسه در نامکان.</p>
+                <div class="card-footer"> 
+                    <a href="files/کتاب_اذن_دخول_امین_حدادی.pdf" download>دانلود PDF</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <img src="images/book4.jpg" alt="گفت‌وگو با نطفه">
+                <h3>گفت‌وگو با نطفه</h3>
+                <p>همراه با دو نامه ناتمام</p>
+                <p>امین حدادی| ناشر-مولف: بیرق‌ها و لکه‌ها با همکاری بارو، ۱۴۰۴-۱۴۰۳</p>
                 <div class="card-footer">
-                    <a href="#" style="pointer-events: none; opacity: 0.6;">به زودی</a>
+                    <a href="files/book4.pdf" download>دانلود PDF</a>
                 </div>
             </div>
         </div>
@@ -578,34 +724,40 @@
             <span class="dot active" data-index="0"></span>
             <span class="dot" data-index="1"></span>
             <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
         </div>
         <div class="poems-grid">
             <div class="poem-card active">
-                <img src="images/poem1.jpg" alt="بهاریه به‌رغم وحشت">
-                <h3>بهاریه به‌رغم وحشت</h3>
-                <p>شعری درباره بهار و وحشت</p>
-                <p>شعر و صدای امین حدادی | نوروز ۱۴۰۳ خورشیدی || بارو</p>
-                <div class="card-footer">
-                    <audio controls preload="metadata" src="files/poem1.mp3"></audio>
-                </div>
-            </div>
-            <div class="poem-card">
                 <video controls preload="metadata">
-                    <source src="images/poem3-video.mp4" type="video/mp4">
+                    <source src="images/poem1-video.mp4" type="video/mp4">
                     مرورگر شما از ویدیو پشتیبانی نمی‌کند.
                 </video>
-                <h3>در ستایش نور</h3>
-                <p>منظومه‌ای برای نمایشگاه</p>
-                <p>امین حدادی | ۱۶ اسفند ۱۴۰۱ | بارو</p>
+                <h3>منشورِ زخم نور</h3>
+                <p>اِکفراسیس‌های سه‌زبانه</p>
+                <p>امین حدادی | ۱۴۰۴-۱۴۰۱، با مراقبت گالری دوست</p>
                 <div class="card-footer">
-                    <audio controls preload="metadata" src="files/poem3-audio.mp3"></audio>
                 </div>
             </div>
             <div class="poem-card">
-                <img src="images/poem2.jpg" alt="شعر دوم">
-                <h3>شعر دوم</h3>
-                <p>شعری مرموز و عمیق</p>
-                <p>۱۳ آبان ۱۴۰۳ تهران</p>
+                <img src="images/poem2.jpg" alt="بهاریه به‌رغم وحشت">
+                <h3>بهاریه به‌رغم وحشت</h3>
+                <p>شعر و صدای امین حدادی | نوروز ۱۴۰۳ خورشیدی | بارو</p>
+                <div class="card-footer">
+                    <audio controls preload="metadata" src="files/poem2.mp3"></audio>
+                </div>
+            </div>
+            <div class="poem-card">
+                <img src="images/poem3.jpg" alt="گُل‌زخم یا گوشتِ اضافی حافظه">
+                <h3>گُل‌زخم یا گوشتِ اضافی حافظه</h3>
+                <p>امین حدادی | ۱۳۹۷</p>
+                <div class="card-footer">
+                    <audio controls preload="metadata" src="files/poem3.mp3"></audio>
+                </div>
+            </div>
+            <div class="poem-card">
+                <img src="images/poem4.jpg" alt="در گزارشِ تصویر">
+                <h3>در گزارشِ تصویر</h3>
+                <p>امین حدادی | ۱۳ آبان ۱۴۰۳</p>
                 <div class="card-footer">
                 </div>
             </div>
@@ -616,18 +768,18 @@
         <div class="translations-grid">
             <div class="translation-item">
                 <div class="content">
-                    <h3>دفترچه‌ی شش شعر</h3>
-                    <p>ترجمه‌ی امین حدادی</p>
-                    <p>مجموعه‌ای از شش شعر ترجمه‌شده توسط امین حدادی که در نشر بارو منتشر شده است.</p>
+                    <h3>جزوه شش شعر</h3>
+                    <p>اینگه‌بورگ باخمان-پاول سلان</p>
+                    <p>ترجمه امین حدادی | بارو، ۱۴۰۲</p>
                     <a href="https://baru.ir/mag-contents/booklet-of-six-poems/" target="_blank">خواندن ترجمه</a>
                 </div>
                 <img src="images/translation1.jpg" alt="ترجمه 1">
             </div>
             <div class="translation-item">
                 <div class="content">
-                    <h3>هفت شعر از اینگه‌بورگ باخمان</h3>
-                    <p>ترجمه‌ی امین حدادی</p>
-                    <p>ترجمه‌ی هفت شعر از اینگه‌بورگ باخمان، شاعر اتریشی، توسط امین حدادی در نشر بارو.</p>
+                    <h3>جزوه اینگه‌بورگ باخمان</h3>
+                    <p>هفت شعر</p>
+                    <p>ترجمه امین حدادی | بارو، ۱۴۰۳</p>
                     <a href="https://baru.ir/poem/ingeborg-bachmann-seven-poems/" target="_blank">خواندن ترجمه</a>
                 </div>
                 <img src="images/translation2.jpg" alt="ترجمه 2">
@@ -635,7 +787,7 @@
         </div>
     </section>
     <section id="notes">
-        <h2>یادداشت‌ها و جستارها</h2>
+        <h2>یادداشت‌ها، جستارها و نامه‌ها</h2>
         <div class="dots">
             <span class="dot active" data-index="0"></span>
             <span class="dot" data-index="1"></span>
@@ -644,29 +796,29 @@
         <div class="notes-grid">
             <div class="note-card active">
                 <img src="images/note1.jpg" alt="یادداشت 1">
-                <h3>بر مزار هدایت</h3>
-                <p>امین حدادی</p>
-                <p>دیری است که «بر مزار هدایت» در جانمان نشسته و آثار پس از آن بسط یا الهام از اسحاق‌پورند.</p>
+                <h3>نامه‌ی شاعری جوان به شاعری جوان</h3>
+                <p>پرسش از وضعیتِ ماقبلِ بودلری شعر مدرن فارسی.</p>
+                <p>امین حدادی | پروژه پوئتیکا، ۱۳۹۸</p>
                 <div class="card-footer">
-                    <a href="files/note1.pdf" download>دانلود PDF</a>
+                    <a href="files/وضعیت_ماقبل_بودلری_شعر_فارسی.pdf" download>دانلود PDF</a>
                 </div>
             </div>
             <div class="note-card">
                 <img src="images/note2.jpg" alt="یادداشت 2">
-                <h3>عارف و وزیری</h3>
-                <p>امین حدادی</p>
-                <p>برای خالقی، عارف و وزیری دو روی یک سکه‌اند: احیای تصنیف‌سازی با عارف و تأسیس موسیقی علمی با وزیری.</p>
+                <h3>در «واوِ» مربی و مهیّج</h3>
+                <p>عارف، وزیری، خالقی: مواجهاتِ ناتمام.</p>
+                <p>امین حدادی | پروژه پوئتیکا، ۱۳۹۸</p>
                 <div class="card-footer">
-                    <a href="files/note2.pdf" download>دانلود PDF</a>
+                    <a href="files/عارف_خالقی_وزیری.pdf" download>دانلود PDF</a>
                 </div>
             </div>
             <div class="note-card">
                 <img src="images/note3.jpg" alt="یادداشت 3">
                 <h3>اطلسِ غربت</h3>
-                <p>امین حدادی</p>
-                <p>سال‌ها در سکوت می‌گذرد. از شاعر جز «زنده است» خبری نیست. راوی لکنت، راه ارتباطی را ریشخند می‌داند.</p>
+                <p>در بازبینیِ «چند صحنه» از محمود داوودی چند صحنه؛ شعرهای ۱۳۸۲-۱۳۷۰ نشر آرویج.</p>
+                <p>پرتره‌ی محمود داوودی</p>
                 <div class="card-footer">
-                    <a href="https://baru.ir/poem/the-atlas-of-roam/" target="_blank">متن کتاب</a>
+                    <a href="https://baru.ir/poem/the-atlas-of-roam/" target="_blank">خواندن متن</a>
                 </div>
             </div>
         </div>
@@ -709,7 +861,7 @@
                 }
             });
         });
-
+        
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -724,12 +876,12 @@
                 }
             });
         }, { threshold: 0.1 });
-
+        
         sections.forEach(section => observer.observe(section));
-
+        
         const hamburger = document.querySelector('.hamburger');
         const navUl = document.querySelector('nav ul');
-
+        
         hamburger.addEventListener('click', () => {
             if (navUl.classList.contains('active')) {
                 navUl.classList.remove('opening');
@@ -746,10 +898,10 @@
                 }, 400);
             }
         });
-
+        
         const form = document.getElementById('contact-form');
         const notification = document.getElementById('notification');
-
+        
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
@@ -769,7 +921,7 @@
                 showNotification('خطایی رخ داد. لطفاً دوباره تلاش کنید.', 'error');
             }
         });
-
+        
         function showNotification(message, type) {
             notification.textContent = message;
             notification.className = `notification ${type}`;
@@ -782,7 +934,9 @@
                 notification.classList.remove('hide');
             }, 4400);
         }
-
+        
+        let isAudioPlaying = false;
+        
         function setupSlider(gridSelector, cardSelector, dotsSelector) {
             const grid = document.querySelector(gridSelector);
             const cards = document.querySelectorAll(`${gridSelector} ${cardSelector}`);
@@ -792,26 +946,25 @@
             let touchEndX = 0;
             let sliderInterval;
             let isAnimating = false;
-            let userInteracted = false;
-
+        
             const style = document.createElement('style');
             style.textContent = `
                 @media (max-width: 768px) {
                     @keyframes slideFadeIn {
-                        0% { transform: translateX(20px); opacity: 0; }
+                        0% { transform: translateX(100%); opacity: 0; }
                         100% { transform: translateX(0); opacity: 1; }
                     }
                     @keyframes slideFadeOut {
                         0% { transform: translateX(0); opacity: 1; }
-                        100% { transform: translateX(-20px); opacity: 0; }
+                        100% { transform: translateX(-100%); opacity: 0; }
                     }
                     @keyframes slideFadeInReverse {
-                        0% { transform: translateX(-20px); opacity: 0; }
+                        0% { transform: translateX(-100%); opacity: 0; }
                         100% { transform: translateX(0); opacity: 1; }
                     }
                     @keyframes slideFadeOutReverse {
                         0% { transform: translateX(0); opacity: 1; }
-                        100% { transform: translateX(20px); opacity: 0; }
+                        100% { transform: translateX(100%); opacity: 0; }
                     }
                     .slide-fade-in { animation: slideFadeIn 0.5s ease-out forwards; }
                     .slide-fade-out { animation: slideFadeOut 0.5s ease-out forwards; }
@@ -854,26 +1007,9 @@
                     }
                     ${gridSelector} { position: relative; }
                 }
-                @media (min-width: 769px) {
-                    .slider-nav { display: none; }
-                    @keyframes cardFadeIn {
-                        0% { opacity: 0; transform: translateY(30px); box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
-                        100% { opacity: 1; transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
-                    }
-                    .book-card, .poem-card, .note-card, .translation-item {
-                        opacity: 0;
-                        transform: translateY(30px);
-                        transition: all 0.3s ease-out;
-                    }
-                    .book-card:hover, .poem-card:hover, .note-card:hover, .translation-item:hover {
-                        transform: translateY(-10px) scale(1.03);
-                        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-                        z-index: 1;
-                    }
-                }
             `;
             document.head.appendChild(style);
-
+        
             const sliderNav = document.createElement('div');
             sliderNav.className = 'slider-nav';
             sliderNav.innerHTML = `
@@ -883,38 +1019,59 @@
             grid.parentNode.classList.add('slider-container');
             grid.parentNode.style.position = 'relative';
             grid.parentNode.insertBefore(sliderNav, grid.nextSibling);
-
+        
             const prevBtn = sliderNav.querySelector('.prev-btn');
             const nextBtn = sliderNav.querySelector('.next-btn');
-
+        
+            if (gridSelector === '.poems-grid') {
+                const audioElements = document.querySelectorAll('#poems .poem-card audio');
+                audioElements.forEach(audio => {
+                    audio.addEventListener('play', () => {
+                        isAudioPlaying = true;
+                        clearInterval(sliderInterval);
+                    });
+                    audio.addEventListener('pause', () => {
+                        isAudioPlaying = false;
+                        startSlider();
+                    });
+                    audio.addEventListener('ended', () => {
+                        isAudioPlaying = false;
+                        startSlider();
+                    });
+                });
+        
+                const videoElements = document.querySelectorAll('#poems .poem-card video');
+                videoElements.forEach(video => {
+                    video.addEventListener('play', () => video.requestFullscreen());
+                });
+            }
+        
             function updateSlider(newIndex, direction = 'next') {
                 if (isAnimating || window.innerWidth > 768) return;
                 isAnimating = true;
-
+        
                 const currentCard = cards[currentIndex];
                 const newCard = cards[newIndex];
-
+        
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === newIndex));
-
+        
+                currentCard.classList.remove('active');
                 currentCard.classList.add(direction === 'next' ? 'slide-fade-out' : 'slide-fade-out-reverse');
-
+        
                 setTimeout(() => {
                     currentCard.style.display = 'none';
                     currentCard.classList.remove(direction === 'next' ? 'slide-fade-out' : 'slide-fade-out-reverse');
                     newCard.style.display = 'flex';
-                    newCard.style.opacity = '0';
-                    newCard.classList.remove('active');
                     newCard.classList.add('active');
                     newCard.classList.add(direction === 'next' ? 'slide-fade-in' : 'slide-fade-in-reverse');
                     setTimeout(() => {
                         newCard.classList.remove(direction === 'next' ? 'slide-fade-in' : 'slide-fade-in-reverse');
-                        newCard.style.opacity = '1';
                         currentIndex = newIndex;
                         isAnimating = false;
                     }, 500);
-                }, 250);
+                }, 500);
             }
-
+        
             function startSlider() {
                 if (window.innerWidth <= 768) {
                     clearInterval(sliderInterval);
@@ -927,8 +1084,9 @@
                             card.classList.remove('active');
                         }
                     });
+                    if (isAudioPlaying) return;
                     sliderInterval = setInterval(() => {
-                        if (!isAnimating && !userInteracted) {
+                        if (!isAnimating && !isAudioPlaying) {
                             const nextIndex = (currentIndex + 1) % cards.length;
                             updateSlider(nextIndex, 'next');
                         }
@@ -938,54 +1096,41 @@
                     cards.forEach(card => card.style.display = 'flex');
                 }
             }
-
-            function resetInterval() {
-                if (window.innerWidth > 768) return;
-                clearInterval(sliderInterval);
-                userInteracted = true;
-                setTimeout(() => {
-                    userInteracted = false;
-                    sliderInterval = setInterval(() => {
-                        if (!isAnimating && !userInteracted) {
-                            const nextIndex = (currentIndex + 1) % cards.length;
-                            updateSlider(nextIndex, 'next');
-                        }
-                    }, 6000);
-                }, 8000);
-            }
-
+        
             function goToNext() {
                 if (!isAnimating && window.innerWidth <= 768) {
+                    clearInterval(sliderInterval);
                     const nextIndex = (currentIndex + 1) % cards.length;
                     updateSlider(nextIndex, 'next');
-                    resetInterval();
+                    setTimeout(startSlider, 8000);
                 }
             }
-
+        
             function goToPrev() {
                 if (!isAnimating && window.innerWidth <= 768) {
+                    clearInterval(sliderInterval);
                     const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
                     updateSlider(prevIndex, 'prev');
-                    resetInterval();
+                    setTimeout(startSlider, 8000);
                 }
             }
-
+        
             startSlider();
             window.addEventListener('resize', startSlider);
-
+        
             grid.addEventListener('touchstart', (e) => {
                 if (window.innerWidth <= 768) {
                     touchStartX = e.changedTouches[0].screenX;
                 }
             }, { passive: true });
-
+        
             grid.addEventListener('touchend', (e) => {
                 if (window.innerWidth <= 768) {
                     touchEndX = e.changedTouches[0].screenX;
                     handleSwipe();
                 }
             }, { passive: true });
-
+        
             function handleSwipe() {
                 const swipeDistance = touchStartX - touchEndX;
                 if (window.innerWidth <= 768) {
@@ -993,24 +1138,23 @@
                     else if (swipeDistance < -50) goToPrev();
                 }
             }
-
+        
             nextBtn.addEventListener('click', goToNext);
             prevBtn.addEventListener('click', goToPrev);
-
+        
             dots.forEach(dot => {
                 dot.addEventListener('click', () => {
                     if (window.innerWidth <= 768 && !isAnimating) {
+                        clearInterval(sliderInterval);
                         const newIndex = parseInt(dot.getAttribute('data-index'));
                         const direction = newIndex > currentIndex ? 'next' : 'prev';
                         updateSlider(newIndex, direction);
-                        resetInterval();
+                        setTimeout(startSlider, 8000);
                     }
                 });
             });
-
-            resetInterval();
         }
-
+        
         setupSlider('.books-grid', '.book-card', '#books .dots');
         setupSlider('.poems-grid', '.poem-card', '#poems .dots');
         setupSlider('.notes-grid', '.note-card', '#notes .dots');
