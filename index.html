@@ -217,11 +217,12 @@
             border: 1px solid #E0E0E0;
             border-radius: 8px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: 450px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
         .translation-item {
@@ -233,9 +234,10 @@
             align-items: center;
             gap: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
 
-        .book-card:hover, .translation-item:hover, .note-card:hover, .poem-card:hover {
+        .book-card:hover, .note-card:hover, .poem-card:hover, .translation-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
@@ -477,11 +479,16 @@
             border-radius: 50%;
             margin: 0 5px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .dot:hover {
+            transform: scale(1.2);
         }
 
         .dot.active {
             background: #1A1A1A;
+            transform: scale(1.2);
         }
 
         @media (max-width: 768px) {
@@ -542,7 +549,7 @@
                 left: 0;
                 opacity: 0;
                 transform: translateX(100%);
-                transition: opacity 0.3s ease, transform 0.3s ease;
+                transition: opacity 0.4s ease, transform 0.4s ease;
             }
             .books-grid .book-card.active, .poems-grid .poem-card.active, .notes-grid .note-card.active {
                 opacity: 1;
@@ -565,7 +572,6 @@
                 border: 1px solid #E0E0E0;
                 border-radius: 8px;
                 background: #FFFFFF;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
             }
             .translation-item img {
                 width: 180px;
@@ -622,6 +628,20 @@
             h1 { font-size: 26px; }
             h2 { font-size: 24px; }
         }
+
+        @media (min-width: 769px) {
+            .slider-nav {
+                display: none !important;
+            }
+            .book-card, .poem-card, .note-card, .translation-item {
+                transition: transform 0.4s ease-out, box-shadow 0.4s ease-out !important;
+            }
+            .book-card:hover, .poem-card:hover, .note-card:hover, .translation-item:hover {
+                transform: translateY(-5px) scale(1.03);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+                z-index: 10;
+            }
+        }
     </style>
 </head>
 <body>
@@ -660,7 +680,7 @@
             <span class="dot active" data-index="0"></span>
             <span class="dot" data-index="1"></span>
             <span class="dot" data-index="2"></span>
-            <span class="dot" data-index="3"></span> <!-- نقطه چهارم اضافه شده -->
+            <span class="dot" data-index="3"></span>
         </div>
         <div class="books-grid">
             <div class="book-card active">
@@ -696,7 +716,7 @@
                 <p>همراه با دو نامه ناتمام</p>
                 <p>امین حدادی| ناشر-مولف: بیرق‌ها و لکه‌ها با همکاری بارو، ۱۴۰۴-۱۴۰۳</p>
                 <div class="card-footer">
-                    <a href="files/book4.pdf" download>دانلود PDF</a>
+                    <a href="files/book4.pdf" download>به زودی ...</a>
                 </div>
             </div>
         </div>
@@ -788,7 +808,7 @@
             </div>
             <div class="note-card">
                 <img src="images/note2.jpg" alt="یادداشت 2">
-                <h3>در «واوِ» مربی و مهیّج</h3>
+                <h3>در «واوِ» مربی و مهیّج</h3>
                 <p>عارف، وزیری، خالقی: مواجهاتِ ناتمام.</p>
                 <p>امین حدادی | پروژه پوئتیکا، ۱۳۹۸</p>
                 <div class="card-footer">
@@ -798,7 +818,7 @@
             <div class="note-card">
                 <img src="images/note3.jpg" alt="یادداشت 3">
                 <h3>اطلسِ غربت</h3>
-                <p>در بازبینیِ «چند صحنه» از محمود داوودی چند صحنه؛ شعرهای ۱۳۸۲-۱۳۷۰ نشر آرویج.</p>
+                <p>در بازبینیِ «چند صحنه» از محمود داوودی چند صحنه؛ شعرهای ۱۳۸۲-۱۳۷۰ نشر آرویج.</p>
                 <p>پرتره‌ی محمود داوودی</p>
                 <div class="card-footer">
                     <a href="https://baru.ir/poem/the-atlas-of-roam/" target="_blank">خواندن متن</a>
@@ -844,7 +864,7 @@
                 }
             });
         });
-    
+
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -859,12 +879,12 @@
                 }
             });
         }, { threshold: 0.1 });
-    
+
         sections.forEach(section => observer.observe(section));
-    
+
         const hamburger = document.querySelector('.hamburger');
         const navUl = document.querySelector('nav ul');
-    
+
         hamburger.addEventListener('click', () => {
             if (navUl.classList.contains('active')) {
                 navUl.classList.remove('opening');
@@ -881,10 +901,10 @@
                 }, 400);
             }
         });
-    
+
         const form = document.getElementById('contact-form');
         const notification = document.getElementById('notification');
-    
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
@@ -904,7 +924,7 @@
                 showNotification('خطایی رخ داد. لطفاً دوباره تلاش کنید.', 'error');
             }
         });
-    
+
         function showNotification(message, type) {
             notification.textContent = message;
             notification.className = `notification ${type}`;
@@ -917,9 +937,9 @@
                 notification.classList.remove('hide');
             }, 4400);
         }
-    
+
         let isMediaPlaying = false;
-    
+
         function setupSlider(gridSelector, cardSelector, dotsSelector) {
             const grid = document.querySelector(gridSelector);
             const cards = document.querySelectorAll(`${gridSelector} ${cardSelector}`);
@@ -929,7 +949,7 @@
             let touchEndX = 0;
             let sliderInterval;
             let isAnimating = false;
-    
+
             const style = document.createElement('style');
             style.textContent = `
                 @media (max-width: 768px) {
@@ -964,52 +984,40 @@
                         z-index: 100;
                         pointer-events: none;
                         padding: 0 10px;
+                        opacity: 0.8;
+                        transition: opacity 0.3s ease;
+                    }
+                    .slider-container:hover .slider-nav {
+                        opacity: 1;
                     }
                     .slider-nav button {
-                        background: rgba(255, 255, 255, 0.9);
+                        background: rgba(255, 255, 255, 0.95);
                         color: #1A1A1A;
                         border: 1px solid #E0E0E0;
                         border-radius: 50%;
-                        width: 36px;
-                        height: 36px;
+                        width: 40px;
+                        height: 40px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        font-size: 16px;
+                        font-size: 18px;
                         cursor: pointer;
                         transition: all 0.3s ease;
                         pointer-events: auto;
-                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
                     }
-                    .slider-container:hover .slider-nav button { opacity: 1; }
                     .slider-nav button:hover {
                         background: #1A1A1A;
                         color: #FFFFFF;
                         border-color: #1A1A1A;
-                        transform: scale(1.1);
+                        transform: scale(1.15);
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                     }
                     ${gridSelector} { position: relative; }
                 }
-                @media (min-width: 769px) {
-                    .slider-nav { display: none; }
-                    @keyframes cardFadeIn {
-                        0% { opacity: 0; transform: translateY(30px); box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
-                        100% { opacity: 1; transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
-                    }
-                    .book-card, .poem-card, .note-card, .translation-item {
-                        opacity: 0;
-                        transform: translateY(30px);
-                        transition: all 0.3s ease-out;
-                    }
-                    .book-card:hover, .poem-card:hover, .note-card:hover, .translation-item:hover {
-                        transform: translateY(-10px) scale(1.03);
-                        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-                        z-index: 1;
-                    }
-                }
             `;
             document.head.appendChild(style);
-    
+
             const sliderNav = document.createElement('div');
             sliderNav.className = 'slider-nav';
             sliderNav.innerHTML = `
@@ -1019,14 +1027,14 @@
             grid.parentNode.classList.add('slider-container');
             grid.parentNode.style.position = 'relative';
             grid.parentNode.insertBefore(sliderNav, grid.nextSibling);
-    
+
             const prevBtn = sliderNav.querySelector('.prev-btn');
             const nextBtn = sliderNav.querySelector('.next-btn');
-    
+
             if (gridSelector === '.poems-grid') {
                 const audioElements = document.querySelectorAll('#poems .poem-card audio');
                 const videoElements = document.querySelectorAll('#poems .poem-card video');
-    
+
                 audioElements.forEach(audio => {
                     audio.addEventListener('play', () => {
                         isMediaPlaying = true;
@@ -1041,7 +1049,7 @@
                         startSlider();
                     });
                 });
-    
+
                 videoElements.forEach(video => {
                     video.addEventListener('play', () => {
                         isMediaPlaying = true;
@@ -1058,19 +1066,19 @@
                     });
                 });
             }
-    
+
             function updateSlider(newIndex, direction = 'next') {
                 if (isAnimating || window.innerWidth > 768) return;
                 isAnimating = true;
-    
+
                 const currentCard = cards[currentIndex];
                 const newCard = cards[newIndex];
-    
+
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === newIndex));
-    
+
                 currentCard.classList.remove('active');
                 currentCard.classList.add(direction === 'next' ? 'slide-fade-out' : 'slide-fade-out-reverse');
-    
+
                 setTimeout(() => {
                     currentCard.style.display = 'none';
                     currentCard.classList.remove(direction === 'next' ? 'slide-fade-out' : 'slide-fade-out-reverse');
@@ -1084,7 +1092,7 @@
                     }, 500);
                 }, 500);
             }
-    
+
             function startSlider() {
                 if (window.innerWidth <= 768) {
                     clearInterval(sliderInterval);
@@ -1109,41 +1117,41 @@
                     cards.forEach(card => card.style.display = 'flex');
                 }
             }
-    
+
             function goToNext() {
                 if (!isAnimating && window.innerWidth <= 768) {
                     clearInterval(sliderInterval);
                     const nextIndex = (currentIndex + 1) % cards.length;
                     updateSlider(nextIndex, 'next');
-                    setTimeout(startSlider, 8000);
+                    setTimeout(startSlider, 7000);
                 }
             }
-    
+
             function goToPrev() {
                 if (!isAnimating && window.innerWidth <= 768) {
                     clearInterval(sliderInterval);
                     const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
                     updateSlider(prevIndex, 'prev');
-                    setTimeout(startSlider, 8000);
+                    setTimeout(startSlider, 7000);
                 }
             }
-    
+
             startSlider();
             window.addEventListener('resize', startSlider);
-    
+
             grid.addEventListener('touchstart', (e) => {
                 if (window.innerWidth <= 768) {
                     touchStartX = e.changedTouches[0].screenX;
                 }
             }, { passive: true });
-    
+
             grid.addEventListener('touchend', (e) => {
                 if (window.innerWidth <= 768) {
                     touchEndX = e.changedTouches[0].screenX;
                     handleSwipe();
                 }
             }, { passive: true });
-    
+
             function handleSwipe() {
                 const swipeDistance = touchStartX - touchEndX;
                 if (window.innerWidth <= 768) {
@@ -1151,10 +1159,10 @@
                     else if (swipeDistance < -50) goToPrev();
                 }
             }
-    
+
             nextBtn.addEventListener('click', goToNext);
             prevBtn.addEventListener('click', goToPrev);
-    
+
             dots.forEach(dot => {
                 dot.addEventListener('click', () => {
                     if (window.innerWidth <= 768 && !isAnimating) {
@@ -1162,12 +1170,12 @@
                         const newIndex = parseInt(dot.getAttribute('data-index'));
                         const direction = newIndex > currentIndex ? 'next' : 'prev';
                         updateSlider(newIndex, direction);
-                        setTimeout(startSlider, 8000);
+                        setTimeout(startSlider, 7000);
                     }
                 });
             });
         }
-    
+
         setupSlider('.books-grid', '.book-card', '#books .dots');
         setupSlider('.poems-grid', '.poem-card', '#poems .dots');
         setupSlider('.notes-grid', '.note-card', '#notes .dots');
