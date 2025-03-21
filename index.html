@@ -413,15 +413,32 @@
                 display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 50px;
+                top: 0;
                 right: 0;
                 background: #FFFFFF;
                 width: 100%;
                 padding: 15px;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                transition: transform 0.4s ease-in-out;
             }
             nav ul.active {
                 display: flex;
+                transform: translateY(50px);
+            }
+            @keyframes slideDown {
+                from { transform: translateY(-100%); opacity: 0; }
+                to { transform: translateY(50px); opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translateY(50px); opacity: 1; }
+                to { transform: translateY(-100%); opacity: 0; }
+            }
+            nav ul.opening {
+                animation: slideDown 0.4s ease-in-out forwards;
+            }
+            nav ul.closing {
+                animation: slideUp 0.4s ease-in-out forwards;
             }
             .hamburger {
                 display: block;
@@ -496,7 +513,7 @@
                 <li><a href="#poems">شعرها</a></li>
                 <li><a href="#translations">ترجمه‌ها</a></li>
                 <li><a href="#notes">یادداشت‌ها</a></li>
-                <li><a href="#elting">تماس با من</a></li>
+                <li><a href="#contact">تماس با من</a></li>
             </ul>
             <div class="hamburger">☰</div>
         </nav>
@@ -677,27 +694,62 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetSection = document.querySelector(this.getAttribute('href'));
+                const navUl = document.querySelector('nav ul');
+                if (window.innerWidth <= 768 && navUl.classList.contains('active')) {
+                    navUl.classList.remove('opening');
+                    navUl.classList.add('closing');
+                    setTimeout(() => {
+                        navUl.classList.remove('active', 'closing');
+                        navUl.style.display = 'none';
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 400);
+                } else {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
+
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    if (window.innerWidth > 768) {
+                        const cards = entry.target.querySelectorAll('.book-card, .poem-card, .note-card, .translation-item');
+                        cards.forEach((card, index) => {
+                            card.style.animation = `cardFadeIn 0.8s ease-out ${index * 0.1}s forwards`;
+                        });
+                    }
                 }
             });
         }, { threshold: 0.1 });
+
         sections.forEach(section => observer.observe(section));
+
         const hamburger = document.querySelector('.hamburger');
         const navUl = document.querySelector('nav ul');
+
         hamburger.addEventListener('click', () => {
-            navUl.classList.toggle('active');
+            if (navUl.classList.contains('active')) {
+                navUl.classList.remove('opening');
+                navUl.classList.add('closing');
+                setTimeout(() => {
+                    navUl.classList.remove('active', 'closing');
+                    navUl.style.display = 'none';
+                }, 400);
+            } else {
+                navUl.style.display = 'flex';
+                navUl.classList.add('active', 'opening');
+                setTimeout(() => {
+                    navUl.classList.remove('opening');
+                }, 400);
+            }
         });
+
         const form = document.getElementById('contact-form');
         const notification = document.getElementById('notification');
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
@@ -705,9 +757,7 @@
                 const response = await fetch('https://formspree.io/f/xyzezdoe', {
                     method: 'POST',
                     body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    headers: { 'Accept': 'application/json' }
                 });
                 if (response.ok) {
                     showNotification('پیام شما با موفقیت ارسال شد!', 'success');
@@ -719,6 +769,7 @@
                 showNotification('خطایی رخ داد. لطفاً دوباره تلاش کنید.', 'error');
             }
         });
+
         function showNotification(message, type) {
             notification.textContent = message;
             notification.className = `notification ${type}`;
@@ -731,87 +782,235 @@
                 notification.classList.remove('hide');
             }, 4400);
         }
+
         function setupSlider(gridSelector, cardSelector, dotsSelector) {
+            const grid = document.querySelector(gridSelector);
             const cards = document.querySelectorAll(`${gridSelector} ${cardSelector}`);
             const dots = document.querySelectorAll(`${dotsSelector} .dot`);
             let currentIndex = 0;
             let touchStartX = 0;
             let touchEndX = 0;
             let sliderInterval;
+            let isAnimating = false;
+            let userInteracted = false;
 
-            function updateSlider(newIndex) {
-                cards.forEach(card => card.classList.remove('active'));
-                cards[newIndex].classList.add('active');
+            const style = document.createElement('style');
+            style.textContent = `
+                @media (max-width: 768px) {
+                    @keyframes slideFadeIn {
+                        0% { transform: translateX(20px); opacity: 0; }
+                        100% { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideFadeOut {
+                        0% { transform: translateX(0); opacity: 1; }
+                        100% { transform: translateX(-20px); opacity: 0; }
+                    }
+                    @keyframes slideFadeInReverse {
+                        0% { transform: translateX(-20px); opacity: 0; }
+                        100% { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideFadeOutReverse {
+                        0% { transform: translateX(0); opacity: 1; }
+                        100% { transform: translateX(20px); opacity: 0; }
+                    }
+                    .slide-fade-in { animation: slideFadeIn 0.5s ease-out forwards; }
+                    .slide-fade-out { animation: slideFadeOut 0.5s ease-out forwards; }
+                    .slide-fade-in-reverse { animation: slideFadeInReverse 0.5s ease-out forwards; }
+                    .slide-fade-out-reverse { animation: slideFadeOutReverse 0.5s ease-out forwards; }
+                    .slider-nav {
+                        display: flex;
+                        justify-content: space-between;
+                        position: absolute;
+                        width: 100%;
+                        top: 50%;
+                        left: 0;
+                        transform: translateY(-50%);
+                        z-index: 100;
+                        pointer-events: none;
+                        padding: 0 10px;
+                    }
+                    .slider-nav button {
+                        background: rgba(255, 255, 255, 0.9);
+                        color: #1A1A1A;
+                        border: 1px solid #E0E0E0;
+                        border-radius: 50%;
+                        width: 36px;
+                        height: 36px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 16px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        pointer-events: auto;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    }
+                    .slider-container:hover .slider-nav button { opacity: 1; }
+                    .slider-nav button:hover {
+                        background: #1A1A1A;
+                        color: #FFFFFF;
+                        border-color: #1A1A1A;
+                        transform: scale(1.1);
+                    }
+                    ${gridSelector} { position: relative; }
+                }
+                @media (min-width: 769px) {
+                    .slider-nav { display: none; }
+                    @keyframes cardFadeIn {
+                        0% { opacity: 0; transform: translateY(30px); box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+                        100% { opacity: 1; transform: translateY(0); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+                    }
+                    .book-card, .poem-card, .note-card, .translation-item {
+                        opacity: 0;
+                        transform: translateY(30px);
+                        transition: all 0.3s ease-out;
+                    }
+                    .book-card:hover, .poem-card:hover, .note-card:hover, .translation-item:hover {
+                        transform: translateY(-10px) scale(1.03);
+                        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                        z-index: 1;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            const sliderNav = document.createElement('div');
+            sliderNav.className = 'slider-nav';
+            sliderNav.innerHTML = `
+                <button class="prev-btn"><i class="fas fa-chevron-right"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-left"></i></button>
+            `;
+            grid.parentNode.classList.add('slider-container');
+            grid.parentNode.style.position = 'relative';
+            grid.parentNode.insertBefore(sliderNav, grid.nextSibling);
+
+            const prevBtn = sliderNav.querySelector('.prev-btn');
+            const nextBtn = sliderNav.querySelector('.next-btn');
+
+            function updateSlider(newIndex, direction = 'next') {
+                if (isAnimating || window.innerWidth > 768) return;
+                isAnimating = true;
+
+                const currentCard = cards[currentIndex];
+                const newCard = cards[newIndex];
+
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === newIndex));
-                currentIndex = newIndex;
+
+                currentCard.classList.add(direction === 'next' ? 'slide-fade-out' : 'slide-fade-out-reverse');
+
+                setTimeout(() => {
+                    currentCard.style.display = 'none';
+                    currentCard.classList.remove(direction === 'next' ? 'slide-fade-out' : 'slide-fade-out-reverse');
+                    newCard.style.display = 'flex';
+                    newCard.style.opacity = '0';
+                    newCard.classList.remove('active');
+                    newCard.classList.add('active');
+                    newCard.classList.add(direction === 'next' ? 'slide-fade-in' : 'slide-fade-in-reverse');
+                    setTimeout(() => {
+                        newCard.classList.remove(direction === 'next' ? 'slide-fade-in' : 'slide-fade-in-reverse');
+                        newCard.style.opacity = '1';
+                        currentIndex = newIndex;
+                        isAnimating = false;
+                    }, 500);
+                }, 250);
             }
 
             function startSlider() {
                 if (window.innerWidth <= 768) {
                     clearInterval(sliderInterval);
                     cards.forEach((card, i) => {
-                        card.style.display = 'flex';
-                        card.classList.toggle('active', i === currentIndex);
+                        if (i === currentIndex) {
+                            card.style.display = 'flex';
+                            card.classList.add('active');
+                        } else {
+                            card.style.display = 'none';
+                            card.classList.remove('active');
+                        }
                     });
                     sliderInterval = setInterval(() => {
-                        const nextIndex = (currentIndex + 1) % cards.length;
-                        updateSlider(nextIndex);
-                    }, 5000);
+                        if (!isAnimating && !userInteracted) {
+                            const nextIndex = (currentIndex + 1) % cards.length;
+                            updateSlider(nextIndex, 'next');
+                        }
+                    }, 6000);
                 } else {
                     clearInterval(sliderInterval);
-                    cards.forEach(card => {
-                        card.style.display = 'flex';
-                        card.classList.remove('active');
-                    });
+                    cards.forEach(card => card.style.display = 'flex');
+                }
+            }
+
+            function resetInterval() {
+                if (window.innerWidth > 768) return;
+                clearInterval(sliderInterval);
+                userInteracted = true;
+                setTimeout(() => {
+                    userInteracted = false;
+                    sliderInterval = setInterval(() => {
+                        if (!isAnimating && !userInteracted) {
+                            const nextIndex = (currentIndex + 1) % cards.length;
+                            updateSlider(nextIndex, 'next');
+                        }
+                    }, 6000);
+                }, 8000);
+            }
+
+            function goToNext() {
+                if (!isAnimating && window.innerWidth <= 768) {
+                    const nextIndex = (currentIndex + 1) % cards.length;
+                    updateSlider(nextIndex, 'next');
+                    resetInterval();
+                }
+            }
+
+            function goToPrev() {
+                if (!isAnimating && window.innerWidth <= 768) {
+                    const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
+                    updateSlider(prevIndex, 'prev');
+                    resetInterval();
                 }
             }
 
             startSlider();
             window.addEventListener('resize', startSlider);
 
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        const newIndex = parseInt(dot.getAttribute('data-index'));
-                        updateSlider(newIndex);
-                        resetInterval();
-                    }
-                });
-            });
-
-            const gridElement = document.querySelector(gridSelector);
-            gridElement.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
+            grid.addEventListener('touchstart', (e) => {
+                if (window.innerWidth <= 768) {
+                    touchStartX = e.changedTouches[0].screenX;
+                }
             }, { passive: true });
 
-            gridElement.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
+            grid.addEventListener('touchend', (e) => {
+                if (window.innerWidth <= 768) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                }
             }, { passive: true });
 
             function handleSwipe() {
                 const swipeDistance = touchStartX - touchEndX;
                 if (window.innerWidth <= 768) {
-                    if (swipeDistance > 50) {
-                        const nextIndex = (currentIndex + 1) % cards.length;
-                        updateSlider(nextIndex);
-                        resetInterval();
-                    } else if (swipeDistance < -50) {
-                        const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
-                        updateSlider(prevIndex);
-                        resetInterval();
-                    }
+                    if (swipeDistance > 50) goToNext();
+                    else if (swipeDistance < -50) goToPrev();
                 }
             }
 
-            function resetInterval() {
-                clearInterval(slatInterval);
-                sliderInterval = setInterval(() => {
-                    const nextIndex = (currentIndex + 1) % cards.length;
-                    updateSlider(nextIndex);
-                }, 5000);
-            }
+            nextBtn.addEventListener('click', goToNext);
+            prevBtn.addEventListener('click', goToPrev);
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    if (window.innerWidth <= 768 && !isAnimating) {
+                        const newIndex = parseInt(dot.getAttribute('data-index'));
+                        const direction = newIndex > currentIndex ? 'next' : 'prev';
+                        updateSlider(newIndex, direction);
+                        resetInterval();
+                    }
+                });
+            });
+
+            resetInterval();
         }
+
         setupSlider('.books-grid', '.book-card', '#books .dots');
         setupSlider('.poems-grid', '.poem-card', '#poems .dots');
         setupSlider('.notes-grid', '.note-card', '#notes .dots');
