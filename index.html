@@ -363,7 +363,7 @@
             border: 1px solid #E0E0E0;
             border-radius: 8px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -666,10 +666,13 @@
         <img src="images/profile.jpg" alt="امین حدادی">
         <div>
             <h1>امین حدادی | شعر و شاعری</h1>
-            <p>امین حدادی، شاعر، مترجم و منتقد ادبی ساکن تهران است. از او آثاری چون «زخم‌های باز و ملال تهران» (نشر افراز)، «تراشکاری فلز آینده؛ چهار پاره و یک آنتولوژی از پرتره مجید نفیسی» (نشر بارو) و «اذن دخول» (نشر بارو) منتشر شده است. آخرین اثر او، منظومه «گفت‌وگو با نطفه»، به‌صورت ناشر-مولف (بیرق‌ها و لکه‌ها) به چاپ رسیده و مقالات و ترجمه‌هایش در مجلات ادبی کاغذی و مجازی منتشر شده‌اند.</p>
+            <p>امین حدادی، شاعر و مترجم و منتقد ادبی، ساکن تهران است. از او کتاب‌های «زخم‌های باز و ملال تهران» در نشر افراز؛ «تراشکاری فلز آینده؛ چهار پاره و یک آنتولوژی از پرتره مجید نفیسی» در نشر بارو؛ و «منظومه اذن دخول» در نشر بارو منتشر شده است. «گفت‌وگو با نطفه» آخرین کتاب شعر اوست که به‌ صورت ناشر-مولف (بیرق‌ها و لکه‌ها) انتشار یافته است. شماری از مقالات و ترجمه‌های او در جراید و مجلات ادبی‌ کاغذی و مجازی منتشر شده است.</p>
+            <p> </p>
+            <p> ایشان دانش‌آموختهٔ روان‌شناسیِ شناختی است و در زمینه روان‌درمانی اشتغال دارد.</p>
             <div class="social-links">
                 <a href="https://instagram.com/amin.hadadi71/" target="_blank" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
                 <a href="https://t.me/Baruwiki" target="_blank" title="تلگرام"><i class="fab fa-telegram-plane"></i></a>
+                <a href="mailto:" target="_blank" title="ایمیل"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </section>
@@ -830,8 +833,6 @@
         <h2>تماس با من</h2>
         <div class="contact-card">
             <form id="contact-form">
-                <input type="text" name="name" placeholder="نام شما" required>
-                <input type="email" name="email" placeholder="ایمیل شما" required>
                 <textarea name="message" placeholder="پیام شما" rows="5" required></textarea>
                 <button type="submit">ارسال پیام</button>
             </form>
@@ -939,6 +940,7 @@
         }
 
         let isMediaPlaying = false;
+        let currentMedia = null; // برای ردیابی رسانه در حال پخش
 
         function setupSlider(gridSelector, cardSelector, dotsSelector) {
             const grid = document.querySelector(gridSelector);
@@ -1030,6 +1032,35 @@
 
             const prevBtn = sliderNav.querySelector('.prev-btn');
             const nextBtn = sliderNav.querySelector('.next-btn');
+
+            // جمع‌آوری همه رسانه‌ها (صوت و ویدیو) از کل صفحه
+            const allMedia = document.querySelectorAll('audio, video');
+
+            // مدیریت پخش رسانه‌ها
+            allMedia.forEach(media => {
+                media.addEventListener('play', () => {
+                    if (currentMedia && currentMedia !== media && !currentMedia.paused) {
+                        currentMedia.pause(); // متوقف کردن رسانه قبلی
+                    }
+                    currentMedia = media; // به‌روزرسانی رسانه فعلی
+                    isMediaPlaying = true;
+                    clearInterval(sliderInterval); // توقف اسلایدر
+                });
+
+                media.addEventListener('pause', () => {
+                    if (currentMedia === media) {
+                        isMediaPlaying = false;
+                        startSlider(); // ادامه اسلایدر
+                    }
+                });
+
+                media.addEventListener('ended', () => {
+                    if (currentMedia === media) {
+                        isMediaPlaying = false;
+                        startSlider(); // ادامه اسلایدر
+                    }
+                });
+            });
 
             if (gridSelector === '.poems-grid') {
                 const audioElements = document.querySelectorAll('#poems .poem-card audio');
