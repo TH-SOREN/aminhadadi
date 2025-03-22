@@ -667,7 +667,7 @@
         <div>
             <h1>امین حدادی | شعر و شاعری</h1>
             <p>امین حدادی، شاعر و مترجم و منتقد ادبی، ساکن تهران است. از او کتاب‌های «زخم‌های باز و ملال تهران» در نشر افراز؛ «تراشکاری فلز آینده؛ چهار پاره و یک آنتولوژی از پرتره مجید نفیسی» در نشر بارو؛ و «منظومه اذن دخول» در نشر بارو منتشر شده است. «گفت‌وگو با نطفه» آخرین کتاب شعر اوست که به‌ صورت ناشر-مولف (بیرق‌ها و لکه‌ها) انتشار یافته است. شماری از مقالات و ترجمه‌های او در جراید و مجلات ادبی‌ کاغذی و مجازی منتشر شده است.</p>
-            <p> </p>
+            <p> </p>
             <p> ایشان دانش‌آموختهٔ روان‌شناسیِ شناختی است و در زمینه روان‌درمانی اشتغال دارد.</p>
             <div class="social-links">
                 <a href="https://instagram.com/amin.hadadi71/" target="_blank" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
@@ -736,7 +736,6 @@
             <div class="poem-card active">
                 <video controls preload="metadata">
                     <source src="images/poem1-video.mp4" type="video/mp4">
-                    مرورگر شما از ویدیو پشتیبانی نمی‌کند.
                 </video>
                 <h3>منشورِ زخم نور</h3>
                 <p>اِکفراسیس‌های سه‌زبانه</p>
@@ -940,7 +939,7 @@
         }
 
         let isMediaPlaying = false;
-        let currentMedia = null; // برای ردیابی رسانه در حال پخش
+        let currentMedia = null;
 
         function setupSlider(gridSelector, cardSelector, dotsSelector) {
             const grid = document.querySelector(gridSelector);
@@ -1033,31 +1032,29 @@
             const prevBtn = sliderNav.querySelector('.prev-btn');
             const nextBtn = sliderNav.querySelector('.next-btn');
 
-            // جمع‌آوری همه رسانه‌ها (صوت و ویدیو) از کل صفحه
             const allMedia = document.querySelectorAll('audio, video');
 
-            // مدیریت پخش رسانه‌ها
             allMedia.forEach(media => {
                 media.addEventListener('play', () => {
                     if (currentMedia && currentMedia !== media && !currentMedia.paused) {
-                        currentMedia.pause(); // متوقف کردن رسانه قبلی
+                        currentMedia.pause();
                     }
-                    currentMedia = media; // به‌روزرسانی رسانه فعلی
+                    currentMedia = media;
                     isMediaPlaying = true;
-                    clearInterval(sliderInterval); // توقف اسلایدر
+                    clearInterval(sliderInterval);
                 });
 
                 media.addEventListener('pause', () => {
                     if (currentMedia === media) {
                         isMediaPlaying = false;
-                        startSlider(); // ادامه اسلایدر
+                        startSlider();
                     }
                 });
 
                 media.addEventListener('ended', () => {
                     if (currentMedia === media) {
                         isMediaPlaying = false;
-                        startSlider(); // ادامه اسلایدر
+                        startSlider();
                     }
                 });
             });
